@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
-
+import {main} from "../components/lib";
 export default function Home() {
 
   const[ContractAddress,SetContractAddress] = useState("");
@@ -33,8 +33,9 @@ export default function Home() {
     // console.log(Provider)
     }
 
-   function call () {
-    SetOutput("hi")
+  async function call () {
+     let out = await  main(ContractAddress,VaribaleName,Provider)
+     SetOutput(out)
    } 
   return (
     <div className={styles.container}>
@@ -55,8 +56,8 @@ export default function Home() {
                 <label>Provider Network </label>
                   <select  name="vars" value={Provider} onChange={e => 
                       HandleProvider(e.target.value)} >
-                      <option value= "uint">Mainnet</option>
-                      <option value= "string">Testnet</option>
+                      <option value= "mainnet-alpha">Mainnet</option>
+                      <option value= "goerli-alpha">Testnet</option>
                     </select>
                 <br/><br/>
 
